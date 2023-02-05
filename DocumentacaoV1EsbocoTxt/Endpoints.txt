@@ -1,0 +1,241 @@
+Usuario:
+
+	1. /login
+
+		Method: POST
+		Path: /login
+		Body:
+		{
+			email: "jao@gmail.com",
+			senha: "123
+		},
+		Response:
+		{
+			_id: ObjectID("154sdf12e547dde78"),
+			perfil: ObjectID("154sdf12e5676dde"),
+			email: "jao@gmail.com",
+			token: "..."
+		}
+
+Perfil:
+
+	2. /perfil
+
+		Realiza a busca dos Ultimos 5 perfis cadastrados.
+
+		Method: GET
+		Path: /perfil
+		Response: [
+		{
+			nome: "joao silva",
+			dataNascimento: 2000-12-08,
+			skills: ["Proativo", "Javascript", "VueJS", "NodeJs"],
+			disponibilidadeHorario: "Integral",
+			disponibilidadeMudanca: true,
+			educacao: [
+			{
+				instituicao: "E.M. Doutor zebrinha",
+				ingresso: 2009-03-10,
+				conclusao: 2014-12-10,
+				nivelEscolaridade: "Ensino Fundamental"
+			}
+			],
+			certificacoes: [
+			{
+				instituicao: "High Tech Cursos",
+				titulo: "Curso Fabrica de Programador",
+				cargaHoraria: 80
+			}
+			],
+			conexoes: [
+				ObjectId("as678982812sh55),
+				ObjectId("a8839aas91310aa),
+				ObjectId("2188djoih12gf88)
+			]
+		}, ...]
+
+	/pefil
+	
+		Realiza o cadastro do perfil e o cadastro do usuario associado. O usuario cadastrado é uma entidade a parte do perfil,
+		Sendo que o usuario mantem a referencia para o perfil.
+		Após o cadastro o perfil/usuario será feito o Login automaticamente. 
+
+		Method: POST
+		Path: /perfil
+		Body:
+		{
+			usuario: {
+			email: "jao@gmail.com", senha: "123",
+			},
+			nome: "Joao da silva",
+			dataNascimento: 2000-12-08,
+			skills: ["Proativo", "Javascript", "Vuejs", "NodeJs"],
+			disponibilidadeHoarario: "Integral",
+			disponibilidadeMudanca: true,
+			educacao: [
+			{
+				instituicao: "E.M Doutor Zebrinha",
+				ingresso: 2009-03-10,
+				conclusao: 2014-12-10,
+				nivelEscolaridade: "Ensino Fundamental"
+			}
+			],
+			certificacoes: [	
+			{
+				instituicao: "High Tech Cursos",
+				titulo: "Curso Fabrica de Programador",
+				cargaHoraria: 80
+			}
+			]
+		},	
+		Response: 
+			Return Id do usuario cadastrado
+			{
+				_id: ObjectID("154dd34fk311"),
+				perfil: ObjectID("154dd34fk3dd1"),
+				email: "jao@gmail.com"	,
+				token: "..."
+			}
+
+	/perfil/<id>
+	
+		Realiza a busca do perfil por id.
+		
+		Method: GET
+		Path: /perfil/:id
+		Path Param: id do perfil
+		Headers:
+		x-access-token: token
+		Response:
+		{
+			nome: "Joao da silva",
+                        dataNascimento: 2000-12-08,
+                        skills: ["Proativo", "Javascript", "Vuejs", "NodeJs"],
+                        disponibilidadeHoarario: "Integral",
+                        disponibilidadeMudanca: true,
+                        educacao: [
+                        {
+                                instituicao: "E.M Doutor Zebrinha",
+                                ingresso: 2009-03-10,
+                                conclusao: 2014-12-10,
+                                nivelEscolaridade: "Ensino Fundamental"
+                        }
+                        ],
+                        certificacoes: [        
+                        {
+                                instituicao: "High Tech Cursos",
+                                titulo: "Curso Fabrica de Programador",
+                                cargaHoraria: 80
+                        }
+                        ]
+                },      
+
+	/perfil/<id>
+		
+		Realiza a atualização parcial do perfil por id
+
+		Method: PUT
+		Path: /perfil/:id
+		Path Param: id do perfil
+		Headers:
+		x-access-token: token
+		Response:
+		{
+                        nome: "Jão da silva editado",
+                        dataNascimento: 2000-12-08,
+                        skills: ["Proativo", "Javascript", "Vuejs", "NodeJs"],
+                        disponibilidadeHoarario: "Integral",
+                        disponibilidadeMudanca: true,
+                        educacao: [
+                        {
+                                instituicao: "E.M Doutor Zebrinha",
+                                ingresso: 2009-03-10,
+                                conclusao: 2014-12-10,
+                                nivelEscolaridade: "Ensino Fundamental"
+                        }
+                        ],
+                        certificacoes: [
+                        {
+                                instituicao: "High Tech Cursos",
+                                titulo: "Curso Fabrica de Programador",
+                                cargaHoraria: 80
+                        }
+                        ]
+                },
+
+
+Busca
+	/busca
+		
+		realiza busca filtrada utilizando as informações da queryString.
+		Ex: /busca?skills=Nodejs,vuejs,proativo&nome=jão%20da%20Silva
+		
+		Method: GET
+		Path: /busca
+		Query String:
+		skills: String das skills de filtragem, separadas por virgula
+		nome: String do nome para filtragem
+		Response:
+		[
+			{
+                        nome: "Jão da silva editado",
+                        dataNascimento: 2000-12-08,
+                        skills: ["Proativo", "Javascript", "Vuejs", "NodeJs"],
+                        disponibilidadeHoarario: "Integral",
+                        disponibilidadeMudanca: true,
+                        educacao: [
+                        {
+                                instituicao: "E.M Doutor Zebrinha",
+                                ingresso: 2009-03-10,
+                                conclusao: 2014-12-10,
+                                nivelEscolaridade: "Ensino Fundamental"
+                        }
+                        ],
+                        certificacoes: [
+                        {
+                                instituicao: "High Tech Cursos",
+                                titulo: "Curso Fabrica de Programador",
+                                cargaHoraria: 80
+                        }
+                        ]
+	                },
+		...]
+
+Notificações
+
+	/notificacao
+	
+		Realiza o cadastro de uma notificação
+
+		Method: POST
+		Path: /notificacao
+		Headers:
+		x-access-token: token
+		Body:
+		{
+			tipo: "Solicitação de Amizade",
+			titulo: "Solicitação de Amizade",
+			descricao: "Ola fulano, gostaria de fazer parte do meu network?",
+			destinatario: ObjectID("askas122dk23lfff"),
+			remetente: ObjectID("78dsf789ddf99dft22f"),
+		}
+
+	/notificacao/lida/<id>
+
+		Realiza a edicao da notificação indicado que a notificação foi lida.
+		
+		Method: PUT
+                Path: /notificacao/lida/:id
+                Headers: 
+                x-access-token: token
+                Response:
+                {
+                        tipo: "Solicitação de Amizade",
+                        titulo: "Solicitação de Amizade",
+                        descricao: "Ola fulano, gostaria de fazer parte do meu network?",
+                        destinatario: ObjectID("askas122dk23lfff"),
+                        remetente: ObjectID("78dsf789ddf99dft22f"),
+			lida: true
+                }
+
+		

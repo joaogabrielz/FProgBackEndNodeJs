@@ -1,0 +1,22 @@
+1. Usuário 
+	email: String
+	senha: String
+	perfil: Perfil(ref)
+	
+2. Perfil
+	nome: String
+	dataNasc: Date
+	disponibilidadeMudanca: Boolean
+	disponibilidadeHorario: Enum<Meio Periodo, Integral>
+	skills: Array<String>
+	educacao: Array<Object>
+	certificacoes: Array<Object>
+	experiencias: Array<Object>
+	
+3. Notificacoes
+	tipo: Enum<Contato, Solicitações de Amizade>
+	titulo: String
+	descricao: String
+	lido: Boolean
+	remetente: Perfil(ref)
+	destinatario: Perfil(ref)
